@@ -29,7 +29,7 @@
     <properties>
         <community>4.0.2</community>
         <redhat>4.0.2.redhat-00001</redhat>
-        <vertx.version>${community}</vertx.version>
+        <vertx.version>${redhat}</vertx.version>
     </properties>
     <dependencies>
         <dependency>
