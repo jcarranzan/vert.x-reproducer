@@ -5,10 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>db2reproducer</artifactId>
+    <artifactId>reproducer</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
+    
     <build>
         <plugins>
             <plugin>
@@ -28,29 +27,48 @@
     </build>
 
     <properties>
-        <vertx-version>3.9.5</vertx-version>
+        <community>4.0.2</community>
+        <redhat>4.0.2.redhat-00001</redhat>
+        <vertx.version>${community}</vertx.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-db2-client</artifactId>
-            <version>${vertx-version}</version>
+            <artifactId>vertx-web-graphql</artifactId>
+            <version>${vertx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-junit5</artifactId>
             <scope>test</scope>
-            <version>${vertx-version}</version>
+            <version>${vertx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rx-java2</artifactId>
-            <version>${vertx-version}</version>
+            <version>${vertx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rx-java</artifactId>
-            <version>${vertx-version}</version>
+            <version>${vertx.version}</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>redhat-build</id>
+            <name>Red Hat builds Repository</name>
+            <url>http://indy.psi.redhat.com/api/content/maven/group/static</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 </project>
