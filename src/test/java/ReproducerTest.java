@@ -3,6 +3,7 @@ import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
 import io.vertx.qe.CorsServer;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.CapabilityType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -37,19 +37,16 @@ public class ReproducerTest {
         });
     }
 
+    @AfterEach
+    void tearDown() {
+        driver.quit();
+    }
+
     private ChromeDriver getChrome() {
         WebDriverManager.chromedriver().clearPreferences();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
-        options.addArguments("--web-security=no",
-                "--ignore-ssl-errors=yes",
-                "--blink-settings=imagesEnabled=true",
-                "--no-sandbox",
-                "-port=17912");
-        options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-        options.setCapability("acceptSslCerts", true);
         return new ChromeDriver(options);
     }
 
@@ -57,9 +54,6 @@ public class ReproducerTest {
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
         options.setHeadless(true);
-        options.addArguments("--web-security=no", "--ignore-ssl-errors=yes");
-        options.setCapability("acceptSslCerts", true);
         return new FirefoxDriver(options);
     }
-
 }
