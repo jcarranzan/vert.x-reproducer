@@ -27,9 +27,9 @@
     </build>
 
     <properties>
-        <community>4.0.2</community>
-        <redhat>4.0.2.redhat-00001</redhat>
-        <vertx.version>${redhat}</vertx.version>
+        <old>3.9.2.redhat-00001</old>
+        <new>3.9.6.redhat-00001</new>
+        <vertx.version>${new}</vertx.version>
     </properties>
     <dependencies>
         <dependency>
@@ -52,6 +52,16 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rx-java</artifactId>
             <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.7.1</version>
         </dependency>
     </dependencies>
 
