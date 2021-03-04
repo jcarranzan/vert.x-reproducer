@@ -7,15 +7,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(VertxExtension.class)
 public class ReproducerTest {
-    private final ChromeDriver driver = getDriver();
+    private final WebDriver driver = getFirefox();
 
     @BeforeAll
     static void beforeAll(Vertx vertx, VertxTestContext context) {
@@ -34,7 +37,7 @@ public class ReproducerTest {
         });
     }
 
-    private ChromeDriver getDriver() {
+    private ChromeDriver getChrome() {
         WebDriverManager.chromedriver().clearPreferences();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -48,6 +51,15 @@ public class ReproducerTest {
         options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
         options.setCapability("acceptSslCerts", true);
         return new ChromeDriver(options);
+    }
+
+    private FirefoxDriver getFirefox() {
+        WebDriverManager.firefoxdriver().setup();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(true);
+        options.addArguments("--web-security=no", "--ignore-ssl-errors=yes");
+        options.setCapability("acceptSslCerts", true);
+        return new FirefoxDriver(options);
     }
 
 }
