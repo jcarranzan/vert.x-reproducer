@@ -27,8 +27,8 @@
     </build>
 
     <properties>
-        <old>3.9.6.redhat-00001</old>
-        <new>4.0.2.redhat-00001</new>
+        <old>3.9.6</old>
+        <new>4.0.2</new>
         <vertx.version>${old}</vertx.version>
     </properties>
     <dependencies>
