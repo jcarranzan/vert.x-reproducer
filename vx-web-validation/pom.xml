@@ -7,23 +7,27 @@
   <groupId>io.vertx.reproducer</groupId>
   <artifactId>vx-web-validation</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <properties>
+    <vertx.version>4.4.5</vertx.version>
+  </properties>
+
 
 
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-validation</artifactId>
-      <version>4.4.5</version>
+      <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
-      <version>4.4.5</version>
+      <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-junit5</artifactId>
-      <version>4.4.5</version>
+      <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
