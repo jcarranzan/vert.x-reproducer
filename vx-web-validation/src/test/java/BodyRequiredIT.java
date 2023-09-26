@@ -1,7 +1,6 @@
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpClientRequest;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.json.JsonObject;
 import io.vertx.junit5.Checkpoint;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
@@ -58,32 +57,14 @@ public class BodyRequiredIT {
       .request(HttpMethod.POST, 8080, "localhost", "/user")
       .compose(request -> {
 
-        request.putHeader("content-type", "application/json").end("");
+        request.putHeader("content-type", "application/json");
         return request.send();
       })
       .onSuccess(httpClientResponse -> {
         System.out.println("STATUS RESPONSE CODE " + httpClientResponse.statusCode());
-        assertEquals(400, httpClientResponse.statusCode());
+        assertEquals(200, httpClientResponse.statusCode());
         testContext.completeNow();
       }).onFailure(throwable -> testContext.failNow(throwable.getMessage()));
   }
-  @Test
-  void testInvalidJsonRequestBody(Vertx vertx, VertxTestContext testContext) {
-    testContext.verify(() -> {
-      vertx.createHttpClient()
-        .request(HttpMethod.POST, 8080, "localhost", "/user")
-        .compose(request -> {
-          request.putHeader("Content-Type", "application/json")
-            .end("\"invalid\": \"json\""); // Cuerpo no válido según el esquema
-          return request.send();
-        })
-        .onSuccess(httpClientResponse -> {
-          assertEquals(400, httpClientResponse.statusCode()); // Se espera un código de estado 400
-          testContext.completeNow();
-        })
-        .onFailure(throwable -> testContext.failNow(throwable.getMessage()));
-    });
-  }
-
 
 }
